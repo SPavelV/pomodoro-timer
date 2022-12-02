@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ReactComponent as BrainIcon } from "../../assets/icons/brain-fill.svg";
 import { ReactComponent as CoffeeIcon } from "../../assets/icons/coffee.svg";
 
-const StatusStyled = styled.div`
+const Inner = styled.div`
   display: flex;
   flex: 0 1 auto;
   align-items: center;
@@ -15,6 +15,11 @@ const StatusStyled = styled.div`
   line-height: 28px;
   border: 1px solid black;
   gap: 8px;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 32px;
+  }
 `;
 
 export enum StatusTimer {
@@ -31,25 +36,25 @@ export const Status: React.FC<StatusProps> = ({ type }) => {
   switch (type) {
     case StatusTimer.Focus:
       return (
-        <StatusStyled>
+        <Inner>
           <BrainIcon /> Focus
-        </StatusStyled>
+        </Inner>
       );
 
     case StatusTimer.ShortBreak:
       return (
-        <StatusStyled>
+        <Inner>
           <CoffeeIcon />
           Short Break
-        </StatusStyled>
+        </Inner>
       );
 
     case StatusTimer.LongBreak:
       return (
-        <StatusStyled>
+        <Inner>
           <CoffeeIcon />
           Long Break
-        </StatusStyled>
+        </Inner>
       );
 
     default:
