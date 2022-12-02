@@ -8,13 +8,11 @@ const StyledLayout = styled.div`
   flex-direction: row wrap;
   justify-content: center;
   align-items: center;
-  background-color: orange;
 `;
 
 const StyledInner = styled.div`
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   padding: 16px;
-  background-color: red;
 `;
 
 type LayoutProps = {
