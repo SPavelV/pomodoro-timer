@@ -31,8 +31,8 @@ type TimeProps = {
 export const Time: FC<TimeProps> = ({ minutes = 0, seconds = 0, status }) => {
   return (
     <Inner status={status}>
-      <Value>{minutes}</Value>
-      <Value>{seconds}</Value>
+      <Value>{("0" + minutes).slice(-2)}</Value>
+      <Value>{("0" + seconds).slice(-2)}</Value>
     </Inner>
   );
 };
