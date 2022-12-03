@@ -1,7 +1,7 @@
 export enum StatusTimer {
   Focus = "Focus",
-  ShortBreak = "Short Break",
-  LongBreak = "Long Break",
+  ShortBreak = "ShortBreak",
+  LongBreak = "LongBreak",
 }
 
 export enum ColorTheme {

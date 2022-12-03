@@ -4,6 +4,7 @@ import { ReactComponent as BrainIcon } from "../../assets/icons/brain-fill.svg";
 import { ReactComponent as CoffeeIcon } from "../../assets/icons/coffee.svg";
 import { StatusTimer } from "../../types";
 import { getBgColor, getColor } from "../../utils";
+import { useTranslation } from "react-i18next";
 
 const Inner = styled.div<StatusProps>`
   display: flex;
@@ -31,31 +32,27 @@ type StatusProps = {
 };
 
 export const Status: React.FC<StatusProps> = ({ status }) => {
-  switch (status) {
-    case StatusTimer.Focus:
-      return (
-        <Inner status={status}>
-          <BrainIcon /> Focus
-        </Inner>
-      );
+  const { t } = useTranslation();
 
-    case StatusTimer.ShortBreak:
-      return (
-        <Inner status={status}>
-          <CoffeeIcon />
-          Short Break
-        </Inner>
-      );
+  const getIcon = (status: StatusTimer) => {
+    switch (status) {
+      case StatusTimer.Focus:
+        return <BrainIcon />;
 
-    case StatusTimer.LongBreak:
-      return (
-        <Inner status={status}>
-          <CoffeeIcon />
-          Long Break
-        </Inner>
-      );
+      case StatusTimer.ShortBreak:
+        return <CoffeeIcon />;
 
-    default:
-      return null;
-  }
+      case StatusTimer.LongBreak:
+        return <CoffeeIcon />;
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <Inner status={status}>
+      {getIcon(status)} {t(`${status}`)}
+    </Inner>
+  );
 };

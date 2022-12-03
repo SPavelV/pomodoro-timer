@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./localization/i18n";
 import { ThemeContext } from "./context/ThemeContext";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { ColorTheme } from "./types";
