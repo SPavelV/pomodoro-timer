@@ -47,7 +47,7 @@ const ButtonPlayOrPause = styled(Button)`
 `;
 
 type ControlProps = {
-  showPlay: boolean;
+  enabled: boolean;
   status: StatusTimer;
   onClickPlay?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClickSettings?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -56,7 +56,7 @@ type ControlProps = {
 
 export const Control: FC<ControlProps> = ({
   status,
-  showPlay,
+  enabled,
   onClickPlay,
   onClickSettings,
   onClickForward,
@@ -68,7 +68,7 @@ export const Control: FC<ControlProps> = ({
       </ButtonSettingsOrForward>
 
       <ButtonPlayOrPause status={status} onClick={onClickPlay}>
-        {showPlay ? <PlayIcon /> : <PauseIcon />}
+        {enabled ? <PauseIcon /> : <PlayIcon />}
       </ButtonPlayOrPause>
 
       <ButtonSettingsOrForward status={status} onClick={onClickForward}>
