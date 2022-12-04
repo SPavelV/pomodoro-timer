@@ -23,16 +23,18 @@ const Value = styled.div`
 `;
 
 type TimeProps = {
-  minutes?: number;
-  seconds?: number;
+  time?: number;
   status: StatusTimer;
 };
 
-export const Time: FC<TimeProps> = ({ minutes = 0, seconds = 0, status }) => {
+export const Time: FC<TimeProps> = ({ time = 0, status }) => {
+  const min = Math.floor((time / 1000 / 60) % 60);
+  const sec = Math.floor((time / 1000) % 60);
+
   return (
     <Inner status={status}>
-      <Value>{("0" + minutes).slice(-2)}</Value>
-      <Value>{("0" + seconds).slice(-2)}</Value>
+      <Value>{("0" + min).slice(-2)}</Value>
+      <Value>{("0" + sec).slice(-2)}</Value>
     </Inner>
   );
 };
