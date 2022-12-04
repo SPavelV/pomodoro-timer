@@ -1,9 +1,9 @@
 export const getTimeRemaining = (endtime: string) => {
-  var t = Date.parse(endtime) - Date.parse(String(new Date()));
-  var seconds = Math.floor((t / 1000) % 60);
-  var minutes = Math.floor((t / 1000 / 60) % 60);
-  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+  const t = Date.parse(endtime) - Date.parse(String(new Date()));
+  const seconds = Math.floor((t / 1000) % 60);
+  const minutes = Math.floor((t / 1000 / 60) % 60);
+  const hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(t / (1000 * 60 * 60 * 24));
   return {
     total: t,
     days: days,
