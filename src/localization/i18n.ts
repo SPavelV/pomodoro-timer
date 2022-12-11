@@ -6,11 +6,11 @@ import en from "./locales/en/translation.json";
 import ru from "./locales/ru/translation.json";
 
 export const resources = {
-  en: {
-    translation: en,
-  },
   ru: {
     translation: ru,
+  },
+  en: {
+    translation: en,
   },
 } as const;
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { ReactComponent as BrainIcon } from "../../assets/icons/brain-fill.svg";
 import { ReactComponent as CoffeeIcon } from "../../assets/icons/coffee.svg";
@@ -33,7 +33,7 @@ type StatusProps = {
 
 export const Status: React.FC<StatusProps> = ({ status }) => {
   const { t } = useTranslation();
-
+  console.log("status", status);
   const getIcon = (status: StatusTimer) => {
     switch (status) {
       case StatusTimer.Focus:
@@ -50,9 +50,14 @@ export const Status: React.FC<StatusProps> = ({ status }) => {
     }
   };
 
+  const statusLocale = useMemo(
+    () => <span>{t(`${status}`)}</span>,
+    [status, t]
+  );
+
   return (
     <Inner status={status}>
-      {getIcon(status)} {t(`${status}`)}
+      {getIcon(status)} {statusLocale}
     </Inner>
   );
 };
