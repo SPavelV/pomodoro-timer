@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { useStatusContext } from "../../context/StatusContext";
 import { StatusTimer } from "../../types";
 import { getColor } from "../../utils";
 
@@ -23,11 +24,12 @@ const Value = styled.div`
 `;
 
 type TimeProps = {
-  time?: number;
-  status: StatusTimer;
+  time: number;
 };
 
-export const Time: FC<TimeProps> = ({ time = 0, status }) => {
+export const Time: FC<TimeProps> = ({ time = 0 }) => {
+  const { status } = useStatusContext();
+
   const min = Math.floor((time / 1000 / 60) % 60);
   const sec = Math.floor((time / 1000) % 60);
 

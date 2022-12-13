@@ -7,6 +7,7 @@ import { ReactComponent as PlayIcon } from "../../assets/icons/play-fill.svg";
 import { ReactComponent as ForwardIcon } from "../../assets/icons/fast-forward-fill.svg";
 import { getBgColor, getColor } from "../../utils";
 import { Link } from "react-router-dom";
+import { useStatusContext } from "../../context/StatusContext";
 
 const Inner = styled.div`
   display: flex;
@@ -49,19 +50,18 @@ const ButtonPlayOrPause = styled(Button)`
 
 type ControlProps = {
   enabled: boolean;
-  status: StatusTimer;
   onClickPlay?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClickSettings?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClickForward?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export const Control: FC<ControlProps> = ({
-  status,
   enabled,
   onClickPlay,
   onClickSettings,
   onClickForward,
 }) => {
+  const { status } = useStatusContext();
   return (
     <Inner>
       <Link to={UrlRoutes.Settings}>

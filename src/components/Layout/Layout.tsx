@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useStatusContext } from "../../context/StatusContext";
 import { StatusTimer, Colors } from "../../types";
 
 const StyledLayout = styled.div<{ status: StatusTimer }>`
@@ -28,10 +29,11 @@ const StyledInner = styled.div`
 
 type LayoutProps = {
   children: React.ReactNode;
-  status: StatusTimer;
 };
 
-export const Layout: React.FC<LayoutProps> = ({ children, status }) => {
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const { status } = useStatusContext();
+
   return (
     <StyledLayout status={status}>
       <StyledInner>{children}</StyledInner>

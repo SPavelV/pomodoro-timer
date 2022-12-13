@@ -1,4 +1,5 @@
 import { useEffect, useState, useReducer, useRef } from "react";
+import { useStatusContext } from "../context/StatusContext";
 import { StatusTimer } from "../types";
 
 const FOCUS_TIME = 0.2 * 60 * 1000;
@@ -7,7 +8,7 @@ const LONG_BREAK_TIME = 0.2 * 60 * 1000;
 const WORKING_PERIODS = 2;
 
 export const useTimer = () => {
-  const [status, setStatus] = useState<StatusTimer>(StatusTimer.Focus);
+  const { status, setStatus } = useStatusContext();
   const [time, setTime] = useState(FOCUS_TIME);
   const [enabled, toggleEnabled] = useReducer((prev) => !prev, false);
   const [workingPeriodCounter, setWorkingPeriodCounter] = useState(1);
@@ -46,7 +47,7 @@ export const useTimer = () => {
         setStatus(StatusTimer.Focus);
       }
     }
-  }, [time, status, workingPeriodCounter]);
+  }, [time, status, setStatus, workingPeriodCounter]);
 
-  return { time, enabled, status, toggleEnabled } as const;
+  return { time, enabled, toggleEnabled } as const;
 };

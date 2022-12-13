@@ -5,8 +5,9 @@ import { ReactComponent as CoffeeIcon } from "../../assets/icons/coffee.svg";
 import { StatusTimer } from "../../types";
 import { getBgColor, getColor } from "../../utils";
 import { useTranslation } from "react-i18next";
+import { useStatusContext } from "../../context/StatusContext";
 
-const Inner = styled.div<StatusProps>`
+const Inner = styled.div<{ status: StatusTimer }>`
   display: flex;
   flex: 0 1 auto;
   align-items: center;
@@ -27,13 +28,9 @@ const Inner = styled.div<StatusProps>`
   }
 `;
 
-type StatusProps = {
-  status: StatusTimer;
-};
-
-export const Status: React.FC<StatusProps> = ({ status }) => {
+export const Status: React.FC = () => {
+  const { status } = useStatusContext();
   const { t } = useTranslation();
-  console.log("status", status);
   const getIcon = (status: StatusTimer) => {
     switch (status) {
       case StatusTimer.Focus:

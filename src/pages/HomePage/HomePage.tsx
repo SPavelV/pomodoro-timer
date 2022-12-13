@@ -6,19 +6,19 @@ import { Control } from "../../components/Control/Control";
 import { useTimer } from "../../hooks/useTimer";
 
 export const HomePage = () => {
-  const { time, enabled, status, toggleEnabled } = useTimer();
+  const { time, enabled, toggleEnabled } = useTimer();
 
   const onClickPlay: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     toggleEnabled();
   };
 
   return (
-    <Layout status={status}>
-      <Status status={status} />
+    <Layout>
+      <Status />
 
-      <Time status={status} time={time} />
+      <Time time={time} />
 
-      <Control status={status} enabled={enabled} onClickPlay={onClickPlay} />
+      <Control enabled={enabled} onClickPlay={onClickPlay} />
     </Layout>
   );
 };
