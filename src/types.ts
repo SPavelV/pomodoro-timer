@@ -23,3 +23,8 @@ export enum Colors {
   GreenAlpha100 = "rgba(77, 218, 110, 0.15)",
   GreenAlpha600 = "rgba(77, 218, 110, 0.62)",
 }
+
+export const enum UrlRoutes {
+  Settings = "settings",
+  Statistic = "statistic",
+}

@@ -1,11 +1,12 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { StatusTimer, Colors } from "../../types";
+import { StatusTimer, Colors, UrlRoutes } from "../../types";
 import { ReactComponent as DotsIcon } from "../../assets/icons/dots-three-outline-fill.svg";
 import { ReactComponent as PauseIcon } from "../../assets/icons/pause-fill.svg";
 import { ReactComponent as PlayIcon } from "../../assets/icons/play-fill.svg";
 import { ReactComponent as ForwardIcon } from "../../assets/icons/fast-forward-fill.svg";
 import { getBgColor, getColor } from "../../utils";
+import { Link } from "react-router-dom";
 
 const Inner = styled.div`
   display: flex;
@@ -63,9 +64,11 @@ export const Control: FC<ControlProps> = ({
 }) => {
   return (
     <Inner>
-      <ButtonSettingsOrForward status={status} onClick={onClickSettings}>
-        <DotsIcon />
-      </ButtonSettingsOrForward>
+      <Link to={UrlRoutes.Settings}>
+        <ButtonSettingsOrForward status={status} onClick={onClickSettings}>
+          <DotsIcon />
+        </ButtonSettingsOrForward>
+      </Link>
 
       <ButtonPlayOrPause status={status} onClick={onClickPlay}>
         {enabled ? <PauseIcon /> : <PlayIcon />}
