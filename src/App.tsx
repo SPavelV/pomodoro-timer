@@ -1,29 +1,16 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./localization/i18n";
-import { ThemeContext } from "./context/ThemeContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import { HomePage } from "./pages/HomePage/HomePage";
-import { ColorTheme, UrlRoutes } from "./types";
+import { UrlRoutes } from "./types";
 import { SettingsPage } from "./pages/SettingsPage/SettingsPage";
 
 function App() {
-  const [theme, setTheme] = useState(ColorTheme.Light);
-
-  const themeState = useMemo(
-    () => ({
-      theme,
-      switchTheme: () =>
-        setTheme(
-          theme === ColorTheme.Dark ? ColorTheme.Light : ColorTheme.Light
-        ),
-    }),
-    [theme]
-  );
-
   return (
     <div className="App">
-      <ThemeContext.Provider value={themeState}>
+      <ThemeProvider>
         <BrowserRouter>
           <Routes>
             <Route index element={<HomePage />} />
@@ -34,7 +21,7 @@ function App() {
             />
           </Routes>
         </BrowserRouter>
-      </ThemeContext.Provider>
+      </ThemeProvider>
     </div>
   );
 }
