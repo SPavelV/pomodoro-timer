@@ -2,6 +2,7 @@ export enum StatusTimer {
   Focus = "Focus",
   ShortBreak = "ShortBreak",
   LongBreak = "LongBreak",
+  Waiting = "Waiting",
 }
 
 export enum ColorTheme {
@@ -10,6 +11,7 @@ export enum ColorTheme {
 }
 
 export enum Colors {
+  White = "#fff",
   Red900 = "#471515",
   Red50 = "#FFF2F2",
   RedAlpha100 = "rgba(255, 76, 76, 0.15)",
@@ -22,6 +24,9 @@ export enum Colors {
   Green50 = "#F2FFF5",
   GreenAlpha100 = "rgba(77, 218, 110, 0.15)",
   GreenAlpha600 = "rgba(77, 218, 110, 0.62)",
+  BlackAlpha100 = "rgba(0, 0, 0, 0.15)",
+  BlackAlpha200 = "rgba(0, 0, 0, 0.24)",
+  BlackAlpha600 = "rgba(0, 0, 0, 0.62)",
 }
 
 export const enum UrlRoutes {
