@@ -39,9 +39,10 @@ const Close = styled.button`
 
 type PopupProps = {
   isOpened: boolean;
-  title: string;
+  title: ReactNode;
   onClose: () => void;
   children: ReactNode;
+  closeIcon?: ReactNode;
 };
 
 export const Popup: FC<PopupProps> = ({
@@ -49,15 +50,14 @@ export const Popup: FC<PopupProps> = ({
   isOpened,
   onClose,
   title,
+  closeIcon,
 }) => {
   return (
     <PopupOverlay isOpened={isOpened} onClose={onClose}>
       <Inner>
         <Header>
           <Title>{title}</Title>
-          <Close onClick={onClose}>
-            <CloseIcon />
-          </Close>
+          <Close onClick={onClose}>{closeIcon || <CloseIcon />}</Close>
         </Header>
         {children}
       </Inner>
