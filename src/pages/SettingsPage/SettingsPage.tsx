@@ -8,6 +8,7 @@ import { StatusTimer } from "../../types";
 import { getColor } from "../../utils";
 import { useStatusContext } from "../../context/StatusContext";
 import { useTranslation } from "react-i18next";
+import { useThemeContext } from "../../context/ThemeContext";
 
 const InnerWithStatus = styled.span<{ status: StatusTimer }>`
   color: ${({ status }) => getColor(status)};
@@ -18,10 +19,11 @@ const InnerWithStatus = styled.span<{ status: StatusTimer }>`
 
 export const SettingsPage = () => {
   const { status } = useStatusContext();
+  const { setDarkTheme } = useThemeContext();
   const { t } = useTranslation();
 
   const onChangeTheme = (checked: boolean) => {
-    console.log("onChangeTheme checked:", checked);
+    setDarkTheme(checked);
   };
 
   return (
