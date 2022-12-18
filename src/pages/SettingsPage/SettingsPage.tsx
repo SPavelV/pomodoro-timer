@@ -4,7 +4,7 @@ import { Popup } from "../../components/Popup/Popup";
 import { Switch } from "../../components/Switch/Switch";
 import { ReactComponent as CloseIcon } from "../../assets/icons/x.svg";
 import styled from "styled-components";
-import { StatusTimer } from "../../types";
+import { Colors, StatusTimer } from "../../types";
 import { getColor } from "../../utils";
 import { useStatusContext } from "../../context/StatusContext";
 import { useTranslation } from "react-i18next";
@@ -15,6 +15,22 @@ const InnerWithStatus = styled.span<{ status: StatusTimer }>`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const PopupContent = styled.div<{ status: StatusTimer }>`
+  color: ${({ status }) => getColor(status)};
+`;
+
+const SettingItem = styled.div`
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const SettingProp = styled.div`
+  font-size: 16px;
+  line-height: 19px;
 `;
 
 export const SettingsPage = () => {
@@ -40,7 +56,16 @@ export const SettingsPage = () => {
           </InnerWithStatus>
         }
       >
-        <Switch onChange={onChangeTheme} name="theme" />
+        <PopupContent status={status}>
+          <SettingItem>
+            <SettingProp>Dark mode</SettingProp>
+            <Switch onChange={onChangeTheme} name="theme" />
+          </SettingItem>
+
+          <SettingItem>
+            <SettingProp>Focus length</SettingProp>
+          </SettingItem>
+        </PopupContent>
       </Popup>
     </Layout>
   );

@@ -25,8 +25,10 @@ const Overlay = styled.div`
   cursor: pointer;
 `;
 
-const Child = styled.div`
+const Child = styled.div<{ maxWidth?: number }>`
   position: relative;
+  width: 100%;
+  max-width: ${(props) => props.maxWidth || "440px"};
 `;
 
 type PopupOverlayProps = {

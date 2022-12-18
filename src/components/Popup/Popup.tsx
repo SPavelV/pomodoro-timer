@@ -5,10 +5,8 @@ import { PopupOverlay } from "../PopupOverlay/PopupOverlay";
 import { ReactComponent as CloseIcon } from "../../assets/icons/x.svg";
 
 const Inner = styled.div`
-  max-width: 440px;
-  width: 100%;
   max-height: 750px;
-  padding: 16px;
+  padding: 24px;
   background: ${Colors.Red50};
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.039),
     0px 5.5px 16px rgba(0, 0, 0, 0.19);
