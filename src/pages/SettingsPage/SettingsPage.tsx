@@ -9,6 +9,7 @@ import { getColor } from "../../utils";
 import { useStatusContext } from "../../context/StatusContext";
 import { useTranslation } from "react-i18next";
 import { useThemeContext } from "../../context/ThemeContext";
+import { InputNumber } from "../../components/InputNumber/InputNumber";
 
 const InnerWithStatus = styled.span<{ status: StatusTimer }>`
   color: ${({ status }) => getColor(status)};
@@ -64,7 +65,10 @@ export const SettingsPage = () => {
 
           <SettingItem>
             <SettingProp>Focus length</SettingProp>
+            <InputNumber />
           </SettingItem>
+
+          <SettingItem></SettingItem>
         </PopupContent>
       </Popup>
     </Layout>
