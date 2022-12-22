@@ -20,12 +20,11 @@ const InputInner = styled.div`
 `;
 
 const Input = styled.input`
-  width: 80px;
+  width: 60px;
   height: 40px;
   font-size: 16px;
   line-height: 19px;
   border: 0;
-  padding-left: 10px;
   text-align: center;
 
   &:focus-visible,
@@ -42,7 +41,7 @@ const Controls = styled.div`
   border-left: 1px solid ${Colors.BlackAlpha100};
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ disabled: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,7 +49,7 @@ const Button = styled.button`
   height: 20px;
   border: 0;
   background-color: ${Colors.White};
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "initial")};
 
   & + & {
     border-top: 1px solid ${Colors.BlackAlpha100};
@@ -64,31 +63,72 @@ const Button = styled.button`
 
 type InputNumberProps = {
   value?: number;
-  onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
+  onChange?: (value: number) => void;
+  step?: number;
+  upperLimit?: number;
+  lowerLimit?: number;
 };
 
-export const InputNumber: FC<InputNumberProps> = ({ value }) => {
+export const InputNumber: FC<InputNumberProps> = ({
+  value = 0,
+  onChange = (f) => f,
+  step = 5,
+  upperLimit = 60,
+  lowerLimit = 0,
+}) => {
+  const [inputValue, setInputValue] = useState(value);
   const [isFocus, setIsFocus] = useState(false);
   const inputRef = useRef(null);
+
+  const increase = () => {
+    setInputValue((value) => {
+      const currentValue =
+        value === upperLimit || value + step >= upperLimit
+          ? upperLimit
+          : value + step;
+      onChange(currentValue);
+      return currentValue;
+    });
+  };
+
+  const decrease = () => {
+    setInputValue((value) => {
+      const currentValue =
+        value === lowerLimit || value - step <= lowerLimit
+          ? lowerLimit
+          : value - step;
+      onChange(currentValue);
+      return currentValue;
+    });
+  };
+
+  const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const currentValue = Number(e.currentTarget.value.replace(/[^0-9]/g, ""));
+    setInputValue((value) => {
+      if (currentValue > upperLimit || currentValue < lowerLimit)
+        return Number(value);
+      return currentValue;
+    });
+  };
 
   return (
     <Inner isFocus={isFocus}>
       <InputInner>
         <Input
-          value={value}
-          type="number"
+          value={inputValue}
           ref={inputRef}
           onFocus={(_) => setIsFocus(true)}
           onBlur={(_) => setIsFocus(false)}
+          onChange={changeHandler}
         />
       </InputInner>
 
       <Controls>
-        <Button>
+        <Button onClick={increase} disabled={inputValue >= upperLimit}>
           <AngleIcon />
         </Button>
 
-        <Button>
+        <Button onClick={decrease} disabled={inputValue <= lowerLimit}>
           <AngleIcon />
         </Button>
       </Controls>
