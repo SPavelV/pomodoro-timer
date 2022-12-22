@@ -1,7 +1,16 @@
 {
+  "DarkMode": "Dark mode",
+  "LightMode": "Light Mode",
   "Focus": "Focus",
   "ShortBreak": "Short break",
   "LongBreak": "Long break",
   "Waiting": "Waiting",
-  "Settings": "Settings"
+  "Settings": "Settings",
+  "FocusLength": "Focus length",
+  "UntilLongBreak": "Pomodoros until long break",
+  "ShortBreakLength": "Short break length",
+  "LongBreakLength": "Long break length",
+  "AutoResumeTimer": "Auto resume timer",
+  "Sound": "Sound",
+  "Notifications": "Notifications"
 }

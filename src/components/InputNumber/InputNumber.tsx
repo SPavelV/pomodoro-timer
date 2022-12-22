@@ -9,7 +9,7 @@ const Inner = styled.div<{ isFocus: boolean }>`
   border: 1px solid ${Colors.BlackAlpha100};
   border-radius: 8px;
   overflow: hidden;
-  background-color: ${Colors.White};
+  background-color: transparent;
   outline: ${({ isFocus }) =>
     isFocus ? `3px solid ${Colors.BlueAlpha100}` : 0};
 `;
@@ -26,6 +26,8 @@ const Input = styled.input`
   line-height: 19px;
   border: 0;
   text-align: center;
+  color: inherit;
+  background-color: transparent;
 
   &:focus-visible,
   &:focus {
@@ -48,8 +50,9 @@ const Button = styled.button<{ disabled: boolean }>`
   width: 30px;
   height: 20px;
   border: 0;
-  background-color: ${Colors.White};
+  background-color: transparent;
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "initial")};
+  color: inherit;
 
   & + & {
     border-top: 1px solid ${Colors.BlackAlpha100};
@@ -105,8 +108,11 @@ export const InputNumber: FC<InputNumberProps> = ({
   const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const currentValue = Number(e.currentTarget.value.replace(/[^0-9]/g, ""));
     setInputValue((value) => {
-      if (currentValue > upperLimit || currentValue < lowerLimit)
+      if (currentValue > upperLimit || currentValue < lowerLimit) {
+        onChange(Number(value));
         return Number(value);
+      }
+      onChange(currentValue);
       return currentValue;
     });
   };

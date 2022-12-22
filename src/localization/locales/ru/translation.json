@@ -1,7 +1,16 @@
 {
+  "DarkMode": "Темная тема",
+  "LightMode": "Светла тема",
   "Focus": "В фокусе",
   "ShortBreak": "Короткий перерыв",
   "LongBreak": "Длинный перерыв",
   "Waiting": "Ожидание",
-  "Settings": "Настройки"
+  "Settings": "Настройки",
+  "FocusLength": "Время фокуса",
+  "UntilLongBreak": "Pomodoros until long break",
+  "ShortBreakLength": "Время короткого перерыва",
+  "LongBreakLength": "Время длинного перерыва",
+  "AutoResumeTimer": "Автоматическое возобновления таймера",
+  "Sound": "Звук",
+  "Notifications": "Уведомления"
 }

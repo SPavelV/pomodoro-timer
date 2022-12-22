@@ -4,7 +4,7 @@ import { useStatusContext } from "../../context/StatusContext";
 import { Colors, StatusTimer } from "../../types";
 import { getColor } from "../../utils";
 
-const Inner = styled.div`
+export const Inner = styled.div`
   position: relative;
   width: 34px;
   display: inline-block;

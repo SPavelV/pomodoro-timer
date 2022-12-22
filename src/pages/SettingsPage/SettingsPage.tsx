@@ -1,10 +1,10 @@
 import React from "react";
 import { Layout } from "../../components/Layout/Layout";
 import { Popup } from "../../components/Popup/Popup";
-import { Switch } from "../../components/Switch/Switch";
+import { Switch, Inner as InnerSwitch } from "../../components/Switch/Switch";
 import { ReactComponent as CloseIcon } from "../../assets/icons/x.svg";
 import styled from "styled-components";
-import { Colors, StatusTimer } from "../../types";
+import { ColorTheme, StatusTimer } from "../../types";
 import { getColor } from "../../utils";
 import { useStatusContext } from "../../context/StatusContext";
 import { useTranslation } from "react-i18next";
@@ -27,6 +27,10 @@ const SettingItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  ${InnerSwitch} {
+    margin: 8px 0;
+  }
 `;
 
 const SettingProp = styled.div`
@@ -36,11 +40,16 @@ const SettingProp = styled.div`
 
 export const SettingsPage = () => {
   const { status } = useStatusContext();
-  const { setDarkTheme } = useThemeContext();
+  const { theme, setDarkTheme } = useThemeContext();
   const { t } = useTranslation();
 
   const onChangeTheme = (checked: boolean) => {
+    console.log("checked :>> ", checked);
     setDarkTheme(checked);
+  };
+
+  const focusLengthHandler = (value: number) => {
+    console.log("value", value);
   };
 
   return (
@@ -59,16 +68,41 @@ export const SettingsPage = () => {
       >
         <PopupContent status={status}>
           <SettingItem>
-            <SettingProp>Dark mode</SettingProp>
+            <SettingProp>
+              {theme === ColorTheme.Dark ? t("DarkMode") : t("LightMode")}
+            </SettingProp>
             <Switch onChange={onChangeTheme} name="theme" />
           </SettingItem>
 
           <SettingItem>
-            <SettingProp>Focus length</SettingProp>
-            <InputNumber />
+            <SettingProp>{t("FocusLength")}</SettingProp>
+            <InputNumber value={25} onChange={focusLengthHandler} />
           </SettingItem>
 
-          <SettingItem></SettingItem>
+          <SettingItem>
+            <SettingProp>{t("UntilLongBreak")}</SettingProp>
+            <InputNumber value={25} onChange={focusLengthHandler} />
+          </SettingItem>
+
+          <SettingItem>
+            <SettingProp>{t("ShortBreakLength")}</SettingProp>
+            <InputNumber value={5} onChange={focusLengthHandler} />
+          </SettingItem>
+
+          <SettingItem>
+            <SettingProp>{t("LongBreakLength")}</SettingProp>
+            <InputNumber value={25} onChange={focusLengthHandler} />
+          </SettingItem>
+
+          <SettingItem>
+            <SettingProp>{t("AutoResumeTimer")}</SettingProp>
+            <Switch name="auto-resume-timer" onChange={(f) => f} />
+          </SettingItem>
+
+          <SettingItem>
+            <SettingProp>{t("Notifications")}</SettingProp>
+            <Switch name="notifications" onChange={(f) => f} />
+          </SettingItem>
         </PopupContent>
       </Popup>
     </Layout>
