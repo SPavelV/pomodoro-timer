@@ -10,6 +10,9 @@ import { useStatusContext } from "../../context/StatusContext";
 import { useTranslation } from "react-i18next";
 import { useThemeContext } from "../../context/ThemeContext";
 import { InputNumber } from "../../components/InputNumber/InputNumber";
+import { selectFocusLength } from "../../store/settings/selectors";
+import { setFocusLength } from "../../store/settings";
+import { useAppDispatch, useAppSelector } from "../../hooks/store";
 
 const InnerWithStatus = styled.span<{ status: StatusTimer }>`
   color: ${({ status }) => getColor(status)};
@@ -42,6 +45,8 @@ export const SettingsPage = () => {
   const { status } = useStatusContext();
   const { theme, setDarkTheme } = useThemeContext();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch;
+  const focusLength = useAppSelector(selectFocusLength);
 
   const onChangeTheme = (checked: boolean) => {
     console.log("checked :>> ", checked);
@@ -76,7 +81,10 @@ export const SettingsPage = () => {
 
           <SettingItem>
             <SettingProp>{t("FocusLength")}</SettingProp>
-            <InputNumber value={25} onChange={focusLengthHandler} />
+            <InputNumber
+              value={focusLength}
+              onChange={(value) => dispatch(setFocusLength(value))}
+            />
           </SettingItem>
 
           <SettingItem>
