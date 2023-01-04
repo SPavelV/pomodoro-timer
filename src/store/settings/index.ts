@@ -6,8 +6,8 @@ export interface SettingsState {
   untilLongBreak: number;
   shortBreakLength: number;
   longBreakLength: number;
-  autoResumeTimer: boolean;
-  notification: boolean;
+  hasAutoResumeTimer: boolean;
+  hasNotification: boolean;
 }
 
 const initialState: SettingsState = {
@@ -15,8 +15,8 @@ const initialState: SettingsState = {
   untilLongBreak: 25,
   shortBreakLength: 5,
   longBreakLength: 25,
-  autoResumeTimer: true,
-  notification: true,
+  hasAutoResumeTimer: false,
+  hasNotification: true,
 };
 
 export const settingsSlice = createSlice({
@@ -35,13 +35,20 @@ export const settingsSlice = createSlice({
     setLongBreakLength: (state, action: PayloadAction<number>) => {
       state.longBreakLength = action.payload;
     },
-    setAutoResumeTimer: (state) => {
-      state.autoResumeTimer = !state.autoResumeTimer;
+    toggleAutoResumeTimer: (state) => {
+      state.hasAutoResumeTimer = !state.hasAutoResumeTimer;
     },
-    notification: (state) => {
-      state.notification = !state.notification;
+    toggleHasNotification: (state, action: PayloadAction) => {
+      state.hasNotification = !state.hasNotification;
     },
   },
 });
 
-export const { setFocusLength, setUntilLongBreak } = settingsSlice.actions;
+export const {
+  setFocusLength,
+  setUntilLongBreak,
+  setShortBreakLength,
+  setLongBreakLength,
+  toggleAutoResumeTimer,
+  toggleHasNotification,
+} = settingsSlice.actions;

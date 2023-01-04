@@ -10,8 +10,22 @@ import { useStatusContext } from "../../context/StatusContext";
 import { useTranslation } from "react-i18next";
 import { useThemeContext } from "../../context/ThemeContext";
 import { InputNumber } from "../../components/InputNumber/InputNumber";
-import { selectFocusLength } from "../../store/settings/selectors";
-import { setFocusLength } from "../../store/settings";
+import {
+  selectFocusLength,
+  selectHasAutoResumeTimer,
+  selectHasNotification,
+  selectLongBreakLength,
+  selectShortBreakLength,
+  selectUntilLongBreak,
+} from "../../store/settings/selectors";
+import {
+  setFocusLength,
+  setUntilLongBreak,
+  setShortBreakLength,
+  setLongBreakLength,
+  toggleAutoResumeTimer,
+  toggleHasNotification,
+} from "../../store/settings";
 import { useAppDispatch, useAppSelector } from "../../hooks/store";
 
 const InnerWithStatus = styled.span<{ status: StatusTimer }>`
@@ -46,16 +60,13 @@ export const SettingsPage = () => {
   const { theme, setDarkTheme } = useThemeContext();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+
   const focusLength = useAppSelector(selectFocusLength);
-
-  const onChangeTheme = (checked: boolean) => {
-    console.log("checked :>> ", checked);
-    setDarkTheme(checked);
-  };
-
-  const focusLengthHandler = (value: number) => {
-    console.log("value", value);
-  };
+  const untilLongBreak = useAppSelector(selectUntilLongBreak);
+  const shortBreakLength = useAppSelector(selectShortBreakLength);
+  const longBreakLength = useAppSelector(selectLongBreakLength);
+  const hasAutoResumeTimer = useAppSelector(selectHasAutoResumeTimer);
+  const hasNotification = useAppSelector(selectHasNotification);
 
   return (
     <Layout>
@@ -76,7 +87,11 @@ export const SettingsPage = () => {
             <SettingProp>
               {theme === ColorTheme.Dark ? t("DarkMode") : t("LightMode")}
             </SettingProp>
-            <Switch onChange={onChangeTheme} name="theme" />
+            <Switch
+              onChange={setDarkTheme}
+              checked={theme === ColorTheme.Dark}
+              name="theme"
+            />
           </SettingItem>
 
           <SettingItem>
@@ -89,27 +104,44 @@ export const SettingsPage = () => {
 
           <SettingItem>
             <SettingProp>{t("UntilLongBreak")}</SettingProp>
-            <InputNumber value={25} onChange={focusLengthHandler} />
+            <InputNumber
+              value={untilLongBreak}
+              onChange={(value) => dispatch(setUntilLongBreak(value))}
+            />
           </SettingItem>
 
           <SettingItem>
             <SettingProp>{t("ShortBreakLength")}</SettingProp>
-            <InputNumber value={5} onChange={focusLengthHandler} />
+            <InputNumber
+              value={shortBreakLength}
+              onChange={(value) => dispatch(setShortBreakLength(value))}
+            />
           </SettingItem>
 
           <SettingItem>
             <SettingProp>{t("LongBreakLength")}</SettingProp>
-            <InputNumber value={25} onChange={focusLengthHandler} />
+            <InputNumber
+              value={longBreakLength}
+              onChange={(value) => dispatch(setLongBreakLength(value))}
+            />
           </SettingItem>
 
           <SettingItem>
             <SettingProp>{t("AutoResumeTimer")}</SettingProp>
-            <Switch name="auto-resume-timer" onChange={(f) => f} />
+            <Switch
+              name="auto-resume-timer"
+              checked={hasAutoResumeTimer}
+              onChange={(_) => dispatch(toggleAutoResumeTimer())}
+            />
           </SettingItem>
 
           <SettingItem>
             <SettingProp>{t("Notifications")}</SettingProp>
-            <Switch name="notifications" onChange={(f) => f} />
+            <Switch
+              name="notifications"
+              checked={hasNotification}
+              onChange={(_) => dispatch(toggleHasNotification())}
+            />
           </SettingItem>
         </PopupContent>
       </Popup>

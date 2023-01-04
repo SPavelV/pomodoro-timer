@@ -14,8 +14,8 @@ export const selectShortBreakLength = (state: RootState) =>
 export const selectLongBreakLength = (state: RootState) =>
   selectSettings(state).longBreakLength;
 
-export const selectAutoResumeTimer = (state: RootState) =>
-  selectSettings(state).autoResumeTimer;
+export const selectHasAutoResumeTimer = (state: RootState) =>
+  selectSettings(state).hasAutoResumeTimer;
 
-export const selectNotification = (state: RootState) =>
-  selectSettings(state).notification;
+export const selectHasNotification = (state: RootState) =>
+  selectSettings(state).hasNotification;

@@ -100,15 +100,14 @@ type SwitchProps = {
   disabled?: boolean;
 };
 
-export const Switch: FC<SwitchProps> = (
-  { onChange, name, checked, disabled } = {
-    onChange: (_) => {},
-    name: "switch",
-    checked: false,
-    disabled: false,
-  }
-) => {
+export const Switch: FC<SwitchProps> = ({
+  onChange = (_) => {},
+  name = "switch",
+  checked = false,
+  disabled = false,
+}) => {
   const { status } = useStatusContext();
+
   return (
     <Inner>
       <Checkbox
