@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Layout } from "../../components/Layout/Layout";
 import { Popup } from "../../components/Popup/Popup";
 import { Switch, Inner as InnerSwitch } from "../../components/Switch/Switch";
@@ -60,6 +61,7 @@ export const SettingsPage = () => {
   const { theme, setDarkTheme } = useThemeContext();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const focusLength = useAppSelector(selectFocusLength);
   const untilLongBreak = useAppSelector(selectUntilLongBreak);
@@ -72,7 +74,7 @@ export const SettingsPage = () => {
     <Layout>
       <Popup
         isOpened={true}
-        onClose={() => console.log("onClose")}
+        onClose={() => navigate("/")}
         title={
           <InnerWithStatus status={status}>{t("Settings")}</InnerWithStatus>
         }
