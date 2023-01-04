@@ -26,7 +26,22 @@ export const settingsSlice = createSlice({
     setFocusLength: (state, action: PayloadAction<number>) => {
       state.focusLength = action.payload;
     },
+    setUntilLongBreak: (state, action: PayloadAction<number>) => {
+      state.untilLongBreak = action.payload;
+    },
+    setShortBreakLength: (state, action: PayloadAction<number>) => {
+      state.shortBreakLength = action.payload;
+    },
+    setLongBreakLength: (state, action: PayloadAction<number>) => {
+      state.longBreakLength = action.payload;
+    },
+    setAutoResumeTimer: (state) => {
+      state.autoResumeTimer = !state.autoResumeTimer;
+    },
+    notification: (state) => {
+      state.notification = !state.notification;
+    },
   },
 });
 
-export const { setFocusLength } = settingsSlice.actions;
+export const { setFocusLength, setUntilLongBreak } = settingsSlice.actions;

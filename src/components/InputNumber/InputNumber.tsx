@@ -79,49 +79,39 @@ export const InputNumber: FC<InputNumberProps> = ({
   upperLimit = 60,
   lowerLimit = 0,
 }) => {
-  const [inputValue, setInputValue] = useState(value);
   const [isFocus, setIsFocus] = useState(false);
   const inputRef = useRef(null);
 
   const increase = () => {
-    setInputValue((value) => {
-      const currentValue =
-        value === upperLimit || value + step >= upperLimit
-          ? upperLimit
-          : value + step;
-      onChange(currentValue);
-      return currentValue;
-    });
+    const currentValue =
+      value === upperLimit || value + step >= upperLimit
+        ? upperLimit
+        : value + step;
+    onChange(currentValue);
   };
 
   const decrease = () => {
-    setInputValue((value) => {
-      const currentValue =
-        value === lowerLimit || value - step <= lowerLimit
-          ? lowerLimit
-          : value - step;
-      onChange(currentValue);
-      return currentValue;
-    });
+    const currentValue =
+      value === lowerLimit || value - step <= lowerLimit
+        ? lowerLimit
+        : value - step;
+    onChange(currentValue);
   };
 
   const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const currentValue = Number(e.currentTarget.value.replace(/[^0-9]/g, ""));
-    setInputValue((value) => {
-      if (currentValue > upperLimit || currentValue < lowerLimit) {
-        onChange(Number(value));
-        return Number(value);
-      }
-      onChange(currentValue);
-      return currentValue;
-    });
+    if (currentValue > upperLimit || currentValue < lowerLimit) {
+      onChange(Number(value));
+      return Number(value);
+    }
+    onChange(currentValue);
   };
 
   return (
     <Inner isFocus={isFocus}>
       <InputInner>
         <Input
-          value={inputValue}
+          value={value}
           ref={inputRef}
           onFocus={(_) => setIsFocus(true)}
           onBlur={(_) => setIsFocus(false)}
@@ -130,11 +120,11 @@ export const InputNumber: FC<InputNumberProps> = ({
       </InputInner>
 
       <Controls>
-        <Button onClick={increase} disabled={inputValue >= upperLimit}>
+        <Button onClick={increase} disabled={value >= upperLimit}>
           <AngleIcon />
         </Button>
 
-        <Button onClick={decrease} disabled={inputValue <= lowerLimit}>
+        <Button onClick={decrease} disabled={value <= lowerLimit}>
           <AngleIcon />
         </Button>
       </Controls>

@@ -45,7 +45,7 @@ export const SettingsPage = () => {
   const { status } = useStatusContext();
   const { theme, setDarkTheme } = useThemeContext();
   const { t } = useTranslation();
-  const dispatch = useAppDispatch;
+  const dispatch = useAppDispatch();
   const focusLength = useAppSelector(selectFocusLength);
 
   const onChangeTheme = (checked: boolean) => {
